@@ -1,5 +1,5 @@
 const { fromEvent } = rxjs;
-const { switchMap, tap } = rxjs.operators;
+const { switchMap, tap, takeUntil } = rxjs.operators;
 
 const selectButton = document.querySelector(".selectButton");
 
@@ -13,7 +13,14 @@ const selectFocusArea = () => {
   const mousemove$ = fromEvent(canvas, "mousemove");
   const mouseup$ = fromEvent(canvas, "mouseup");
 
-  const drawSelectArea = ({ canvas, context, startX, startY, endX, endY }) => {
+  const drawSelectedAreaOnCanvas = ({
+    canvas,
+    context,
+    startX,
+    startY,
+    endX,
+    endY,
+  }) => {
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.beginPath();
     context.strokeStyle = "black";
@@ -23,27 +30,29 @@ const selectFocusArea = () => {
     context.closePath();
   };
 
-  mousedown$
-    .pipe(
-      switchMap((mousedownEvent) => {
-        return mousemove$.pipe(
-          tap((mousemoveEvent) => {
-            console.log("mousemoveEvent");
-            drawSelectArea({
-              canvas,
-              context,
-              startX: mousedownEvent.offsetX,
-              startY: mousedownEvent.offsetY,
-              endX: mousemoveEvent.offsetY,
-              endY: mousemoveEvent.offsetY,
-            });
-          })
-        );
-      })
-    )
-    .subscribe((e) => {
-      // console.log("e", e);
-    });
+  const clearCanvasFully = ({ canvas, context }) =>
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+  const startDragObservable = mousedownEvent.pipe(
+    tap(() => clearCanvasFully({ canvas, context }))
+  );
+
+  const getDraggingAndDropObservable = (mousedownEvent) =>
+    mousemove$.pipe(
+      tap((mousemoveEvent) => {
+        drawSelectedAreaOnCanvas({
+          canvas,
+          context,
+          startX: mousedownEvent.offsetX,
+          startY: mousedownEvent.offsetY,
+          endX: mousemoveEvent.offsetY,
+          endY: mousemoveEvent.offsetY,
+        });
+      }),
+      takeUntil(mouseup$)
+    );
+
+  startDragObservable.pipe(switchMap(getDraggingAndDropObservable)).subscribe();
 };
 
 fromEvent(selectButton, "click").subscribe(async () => {
