@@ -1,0 +1,12 @@
+.wrapper {
+  display: flex;
+}
+
+.selectButton{
+  margin-right: 4px;
+  padding: 4px 8px;
+}
+
+.fillButton {
+  padding: 4px 8px;
+}

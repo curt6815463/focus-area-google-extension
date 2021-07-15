@@ -1,0 +1,10 @@
+{
+  "name": "Focus Area",
+  "description": "Help you focus on reading document",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": ["storage", "activeTab", "scripting"],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
