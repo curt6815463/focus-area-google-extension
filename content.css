@@ -1,0 +1,44 @@
+.focus-area-canvas{
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.focus-area-cover-wrapper{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100000;
+  display: grid;
+  grid-template-areas: 
+  "cover-one cover-one cover-one"
+  "cover-two hollow cover-three"
+  "cover-four cover-four cover-four";
+  pointer-events: none;
+}
+.focus-area-hollow {
+  grid-area: hollow;
+  background-color: transparent;
+}
+.focus-area-cover-one{
+  pointer-events: auto;
+  grid-area: cover-one;
+  background-color: #000;
+}
+.focus-area-cover-two {
+  pointer-events: auto;
+  grid-area: cover-two;
+  background-color: #000;
+}
+.focus-area-cover-three {
+  pointer-events: auto;
+  grid-area: cover-three;
+  background-color: #000;
+}
+.focus-area-cover-four {
+  pointer-events: auto;
+  grid-area: cover-four;
+  background-color: #000;
+}

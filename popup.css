@@ -1,12 +1,39 @@
-.wrapper {
-  display: flex;
+body {
+  width: 220px;
+  background-color: #333;
 }
 
-.selectButton{
-  margin-right: 4px;
-  padding: 4px 8px;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.wrapper > button{
+  line-height: 40px;
+  background-color: #333;
+  color: #fff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.wrapper>button:hover {
+  background-color: #444;
+}
+
+.selectButton {
+  line-height: 40px;
+  background-color: #333;
+
 }
 
 .fillButton {
-  padding: 4px 8px;
+  line-height: 40px;
+  background-color: #333;
+
+}
+
+.clearButton {
+  line-height: 40px;
+  background-color: #333;
+
 }
