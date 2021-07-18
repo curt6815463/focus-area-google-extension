@@ -23,6 +23,15 @@ const selectFocusArea = () => {
   const mousemove$ = fromEvent(canvas, "mousemove");
   const mouseup$ = fromEvent(canvas, "mouseup");
 
+  const drawHintOnCanvas = () => {
+    context.beginPath();
+    context.strokeStyle = "red";
+    context.lineWidth = 10;
+    context.setLineDash([]);
+    context.strokeRect(0, 0, canvas.width, canvas.height);
+    context.closePath();
+  };
+
   const drawSelectedAreaOnCanvas = ({
     canvas,
     context,
@@ -32,6 +41,7 @@ const selectFocusArea = () => {
     endY,
   }) => {
     context.clearRect(0, 0, canvas.width, canvas.height);
+    drawHintOnCanvas();
     context.beginPath();
     context.strokeStyle = "black";
     context.setLineDash([10, 10]);
@@ -44,7 +54,8 @@ const selectFocusArea = () => {
     context.clearRect(0, 0, canvas.width, canvas.height);
 
   const startDrag$ = mousedown$.pipe(
-    tap(() => clearCanvasFully({ canvas, context }))
+    tap(() => clearCanvasFully({ canvas, context })),
+    tap(() => drawHintOnCanvas())
   );
 
   const formatHollowStyleData = ({ mousedownEvent, mousemoveEvent }) => {
@@ -73,6 +84,7 @@ const selectFocusArea = () => {
       takeUntil(mouseup$)
     );
 
+  drawHintOnCanvas();
   startDrag$.pipe(switchMap(getDraggingAndDrop$)).subscribe((data) => {
     window.hollowStyleData = data;
   });
