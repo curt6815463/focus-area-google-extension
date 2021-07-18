@@ -107,11 +107,11 @@ const fillCover = () => {
   coverWrapper.className = "focus-area-cover-wrapper";
   document.body.appendChild(coverWrapper);
   coverWrapper.innerHTML = `
-  <div class='focus-area-cover-one'></div>
-  <div class='focus-area-cover-two'></div>
+  <div class='focus-area-cover-one focus-area-cover'></div>
+  <div class='focus-area-cover-two focus-area-cover'></div>
   <div class='focus-area-hollow'></div>
-  <div class='focus-area-cover-three'></div>
-  <div class='focus-area-cover-four'></div>
+  <div class='focus-area-cover-three focus-area-cover'></div>
+  <div class='focus-area-cover-four focus-area-cover'></div>
   `;
   coverWrapper.style.gridTemplateColumns = `${x1}px ${x2 - x1}px ${
     innerWidth - x2
@@ -122,6 +122,8 @@ const fillCover = () => {
 
   const canvas = document.querySelector(".focus-area-canvas");
   document.body.removeChild(canvas);
+
+  handleCoverListener();
 };
 
 fromEvent(fillButton, "click").subscribe(async () => {

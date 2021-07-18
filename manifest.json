@@ -11,7 +11,7 @@
     {
       "matches": ["*://*/*"],
       "css": ["content.css"],
-      "js": ["rxjs.js"]
+      "js": ["rxjs.js", "content.js"]
     }
   ]
 }

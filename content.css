@@ -26,20 +26,20 @@
 .focus-area-cover-one{
   pointer-events: auto;
   grid-area: cover-one;
-  background-color: #000;
+  background-color: rgba(0,0,0,0.9);
 }
 .focus-area-cover-two {
   pointer-events: auto;
   grid-area: cover-two;
-  background-color: #000;
+  background-color: rgba(0,0,0,0.9);
 }
 .focus-area-cover-three {
   pointer-events: auto;
   grid-area: cover-three;
-  background-color: #000;
+  background-color: rgba(0,0,0,0.9);
 }
 .focus-area-cover-four {
   pointer-events: auto;
   grid-area: cover-four;
-  background-color: #000;
+  background-color: rgba(0,0,0,0.9);
 }
